@@ -30,16 +30,16 @@ fn main() -> ! {
 
     let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
     let clock_pin = io.pins.gpio21.into_push_pull_output();
-    let data_pin = io.pins.gpio22.into_pull_up_input();
-    let mut swd = Swd::new(Some(clock_pin), Some(data_pin), None);
+    let data_pin = io.pins.gpio22.into_push_pull_output();
+    let delay = Delay::new(&clocks);
+    let mut swd = Swd::new(clock_pin, data_pin, delay);
 
     let mut led = io.pins.gpio13.into_push_pull_output();
     led.set_high().unwrap();
 
-    let mut delay = Delay::new(&clocks);
-
     loop {
         led.toggle().unwrap();
-        delay.delay_ms(1000u32);
+        for _ in 0..2000 {}
+        //delay.delay_ms(1000u32);
     }
 }
