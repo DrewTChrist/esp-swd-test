@@ -27,6 +27,13 @@ type SwdDataIn = SwdPin<Input<esp32_hal::gpio::PullUp>, Gpio22Signals, 22>;
 /// Concrete data pin output type on pin 22
 type SwdDataOut = SwdPin<Output<esp32_hal::gpio::PushPull>, Gpio22Signals, 22>;
 
+/// Debug port address for core 0
+const DP0: u32 = 0x01002927;
+/// Debug port address for core 1
+const DP1: u32 = 0x11002927;
+/// Rescue debug port address
+const DPR: u32 = 0xf1002927;
+
 /// Direction of the swd data pin
 enum DataPinMode {
     /// Pull up input
